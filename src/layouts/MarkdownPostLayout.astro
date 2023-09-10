@@ -1,7 +1,6 @@
 ---
 import { Badge } from "@/components/ui/badge";
 import Layout from "./Layout.astro";
-import { Separator } from "@/components/ui/separator";
 import { CalendarDays } from "lucide-react";
 const { frontmatter } = Astro.props;
 import { Image } from "astro:assets";
@@ -10,12 +9,7 @@ import { Image } from "astro:assets";
 <Layout title={frontmatter.title}>
   {
     frontmatter.projectLink && (
-      <a class="static" href="https://github.com/coopdloop">
-        <span class="absolute flex h-3 w-3">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75" />
-
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
-        </span>
+      <a class="static" href={frontmatter.projectLink}>
         <Badge className="h-6 w-30">
           <p>Project Link</p>
         </Badge>
@@ -91,9 +85,5 @@ import { Image } from "astro:assets";
       }
     </div>
   </div>
-  <Separator />
-
-  <div>
-    <slot />
-  </div>
+  <slot />
 </Layout>

@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 export default function Greeting({ messages }: { messages: string[] }) {
