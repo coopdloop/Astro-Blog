@@ -1,3 +1,25 @@
+# My Astro Blog
+
+Welcome to my blog, a space where we explore the wonders of the universe!
+
+## Table of Contents
+
+- [About](#about)
+- [Getting Started](#getting-started)
+- [Articles](#articles)
+- [Contributing](#contributing)
+- [License](#license)
+
+## About
+
+This is a blog that will outline my journey through application development and security. I will be posting articles about my experiences and what I have learned along the way. I hope that you find this blog useful and that it helps you in your own journey.
+
+## Getting Started
+
+This blog is built using the [Astro framework](https://astro.build/), a modern static site generator with a focus on speed and developer experience.
+
+
+
 # Astro Starter Kit: Minimal
 
 ```
