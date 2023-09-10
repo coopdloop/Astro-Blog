@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 16, 18 ]
+        node-version: [ 18.14.2, 18.15.0 ]
     name: Node ${{ matrix.node }} sample
     steps:
       - name: Checkout
