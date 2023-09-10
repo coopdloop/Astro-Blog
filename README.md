@@ -1,3 +1,5 @@
+[![Deploy Blog Post](https://github.com/coopdloop/Astro-Blog/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/coopdloop/Astro-Blog/actions/workflows/deploy.yml)
+
 # My Astro Blog
 
 Welcome to my blog, a space where we explore the wonders of the universe!
