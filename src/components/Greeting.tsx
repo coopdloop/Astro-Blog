@@ -9,8 +9,12 @@ export default function Greeting({ messages }: { messages: string[] }) {
 
   return (
     <div className="flex gap-2 text-xl tracking-wide leading-snug">
-      <h1 className="font-bold animate-pulse">{greeting}! Welcome to my blog🚀</h1>
-      <button onClick={() => setGreeting(randomMessage())}><ReloadIcon/></button>
+      <h1 className="font-bold animate-pulse">
+        {greeting}! Welcome to my blog🚀
+      </h1>
+      <button onClick={() => setGreeting(randomMessage())}>
+        <ReloadIcon height={40} width={40} className="hover:animate-spin" />
+      </button>
     </div>
   );
 }

@@ -49,14 +49,14 @@ const currentPath = Astro.url.pathname;
   }
   <!-- <MyHamburgerMenu client:only="react"/> -->
   <Navigation blogPosts={posts} client:only="react" />
-  <div class="flex flex-row gap-4 fixed right-0 mr-8 top-6 items-center">
+  <div class="flex flex-row gap-4 fixed right-0 mr-8 top-4 items-center">
     {
       currentPath !== "/" && (
         <>
           {currentPath !== "/about" && (
-            <p class="font-light italic z-40">devsec-cooper.codes</p>
+            <p class="font-light italic z-40 bg-background p-1 rounded-lg">devsec-cooper.codes</p>
           )}
-          <a href="/">
+          <a href="/" class="bg-background p-1 rounded-lg">
             <HomeIcon width={40} height={40} />
           </a>
         </>

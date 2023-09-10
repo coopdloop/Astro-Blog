@@ -75,6 +75,7 @@ import { Image } from "astro:assets";
   >
     <p class="my-4">Blog tags:</p>
     <div
+      class="flex flex-wrap justify-center"
       transition:name={`tags_${frontmatter.title}`}
       transition:animate="slide"
     >
@@ -82,7 +83,7 @@ import { Image } from "astro:assets";
         frontmatter.tags.map((tag: string[]) => (
           <a
             href={`/tags/${tag}`}
-            class="m-1 border-dotted border border-[#a1a1a1] rounded-lg p-1 hover:p-2 text-lg transition-all sm:text-xs md:text-sm lg"
+            class="m-1 border-dotted border border-[#a1a1a1] rounded-lg p-1 text-lg transition-all sm:text-xs md:text-sm lg"
           >
             {tag}
           </a>
