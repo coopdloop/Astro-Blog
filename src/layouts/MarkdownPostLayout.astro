@@ -1,0 +1,98 @@
+---
+import { Badge } from "@/components/ui/badge";
+import Layout from "./Layout.astro";
+import { Separator } from "@/components/ui/separator";
+import { CalendarDays } from "lucide-react";
+const { frontmatter } = Astro.props;
+import { Image } from "astro:assets";
+---
+
+<Layout title={frontmatter.title}>
+  {
+    frontmatter.projectLink && (
+      <a class="static" href="https://github.com/coopdloop">
+        <span class="absolute flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75" />
+
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+        </span>
+        <Badge className="h-6 w-30">
+          <p>Project Link</p>
+        </Badge>
+      </a>
+    )
+  }
+
+  <p
+    transition:name={`${frontmatter.description}_${frontmatter.title}`}
+    class="text-2xl text-center"
+  >
+    <em>{frontmatter.description}</em>
+  </p>
+  <span class="flex flex-row gap-2 my-4 justify-center">
+    <Image
+      src={frontmatter.authorImage.url}
+      alt="Cooper Wallace"
+      width={70}
+      height={70}
+      quality={"max"}
+      format="jpg"
+      class="rounded-full"
+      transition:name={`${frontmatter.authorImage.url}_${frontmatter.title}`}
+    />
+    <div class="flex flex-col">
+      <p
+        transition:name={`${frontmatter.author}_${frontmatter.title}`}
+        transition:animate="slide"
+      >
+        Written by: {frontmatter.author}
+      </p>
+      <div class="flex flex-row gap-4">
+        <div class="flex w-fit items-center">
+          <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
+          <p
+            class="text-sm font-thin"
+            transition:name={`${frontmatter.pubDate}_${frontmatter.title}`}
+            transition:animate="slide"
+          >
+            {frontmatter.pubDate}
+          </p>
+        </div>
+        <p
+          class="text-sm font-thin"
+          transition:name={`${frontmatter.ttr}_${frontmatter.title}`}
+          transition:animate="slide"
+        >
+          {frontmatter.ttr}{" read"}
+        </p>
+      </div>
+    </div>
+  </span>
+  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+
+  <div
+    class="my-8 flex flex-wrap items-center w-fit text-center whitespace-nowrap"
+  >
+    <p class="my-4">Blog tags:</p>
+    <div
+      transition:name={`tags_${frontmatter.title}`}
+      transition:animate="slide"
+    >
+      {
+        frontmatter.tags.map((tag: string[]) => (
+          <a
+            href={`/tags/${tag}`}
+            class="m-1 border-dotted border border-[#a1a1a1] rounded-lg p-1 hover:p-2 text-lg transition-all sm:text-xs md:text-sm lg"
+          >
+            {tag}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <Separator />
+
+  <div>
+    <slot />
+  </div>
+</Layout>

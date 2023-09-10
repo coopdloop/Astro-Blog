@@ -1,0 +1,23 @@
+---
+import Layout from "@/layouts/Layout.astro";
+const allPosts = await Astro.glob("../posts/*.md");
+allPosts.sort((a,b)=> Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate));
+const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+const pageTitle = "Tag Index";
+---
+
+<Layout title={pageTitle}>
+  <ul>
+    <div class="flex flex-wrap">
+      {
+        tags.map((tag) => (
+          <a href={`/tags/${tag}`}>
+            <li class="m-1 border-dotted border border-[#a1a1a1] rounded-lg p-4 hover:p-5 text-lg bg-[#f8fcfd] text-black">
+              {tag}
+            </li>
+          </a>
+        ))
+      }
+    </div>
+  </ul>
+</Layout>

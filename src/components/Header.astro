@@ -1,0 +1,68 @@
+---
+import { Navigation } from "@/components/Navigation.tsx";
+import CoffeeButton from "@/components/BuyCoffeeButton.tsx";
+import { ArrowLeftIcon, HomeIcon } from "@radix-ui/react-icons";
+const allPosts = await Astro.glob("../pages/posts/*.md");
+allPosts.sort(
+  (a, b) =>
+    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate)
+);
+const posts = allPosts.map((post) => {
+  const { title, description, pubDate } = post.frontmatter;
+  const url = post.url;
+  return {
+    title,
+    description,
+    pubDate,
+    url,
+  };
+});
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="flex-row justify-center top-1 z-50 px-4 w-full bg-background/95 md:flex sticky"
+>
+  <script is:inline>
+    document.documentElement.classList.add(
+      localStorage.getItem("theme") ?? "light"
+    );
+  </script>
+
+  {
+    currentPath !== "/" && (
+      <a
+        onclick="
+        history.back()
+        "
+        href="/"
+        class="fixed left-2 top-6 bg-blue-500 rounded-lg animate-pulse z-40"
+      >
+        <ArrowLeftIcon
+          width={30}
+          height={30}
+          color="black"
+          className="m-1 stroke-black/50"
+        />
+      </a>
+    )
+  }
+  <!-- <MyHamburgerMenu client:only="react"/> -->
+  <Navigation blogPosts={posts} client:only="react" />
+  <div class="flex flex-row gap-4 fixed right-0 mr-8 top-6 items-center">
+    {
+      currentPath !== "/" && (
+        <>
+          {currentPath !== "/about" && (
+            <p class="font-light italic z-40">devsec-cooper.codes</p>
+          )}
+          <a href="/">
+            <HomeIcon width={40} height={40} />
+          </a>
+        </>
+      )
+    }
+    <!-- <ModeToggle client:load /> -->
+    {currentPath === "/about" && <CoffeeButton />}
+  </div>
+</header>

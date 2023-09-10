@@ -1,0 +1,29 @@
+---
+interface Props {
+  imageUrl: string;
+  certTitle: string;
+  certIssuer: string;
+  issueDate: string;
+}
+
+const { imageUrl, certTitle, certIssuer, issueDate } = Astro.props;
+---
+
+<span
+  class="h-fit w-56 bg-slate-300 rounded-2xl items-center top-0 flex flex-col"
+>
+  <img
+    class="object-cover p-4 rounded-lg"
+    src={imageUrl}
+    alt={certTitle}
+    width="200"
+    height="200"
+  />
+  <div class="text-center">
+    <h1 class="font-semibold text-black text-3xl underline">{certTitle}</h1>
+    <p class="text-lg text-slate-500">{certIssuer}</p>
+    <p class="text-lg text-slate-500 italic">
+      {issueDate}
+    </p>
+  </div>
+</span>

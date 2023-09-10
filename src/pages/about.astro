@@ -1,0 +1,180 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+const pageTitle = "About Me";
+import { Image } from "astro:assets";
+import pfp from "@/assets/images/high_qual_pfp_informal_cropped.jpg";
+import ExperienceCard from "@/components/ExperienceCard.astro";
+import CertificateCard from "@/components/CertificateCard.astro";
+
+const identity = {
+  firstName: "Cooper",
+  lastName: "Wallace",
+  country: "USA",
+  occupation: "Security Software Engineer",
+  hobbies: [
+    "Hiking",
+    "Gym",
+    "Full-stack web development",
+    "Cooking",
+    "Application Security",
+    "Philosophy",
+  ],
+  email: "cooper@lariatlabs.dev",
+  skills: [
+    "React",
+    "Nextjs",
+    "Astro",
+    "DevOps",
+    "Javascript",
+    "Python",
+    "GoLang",
+    "Full-Stack Development",
+    "Full CI/CD Pipelines",
+    "SAST/DAST",
+    "AWS",
+    "Azure",
+    "Git",
+  ],
+};
+---
+
+<Layout title={pageTitle}>
+  <div class="max-w-4xl md:p-8 sm:p-1">
+    <div
+      class="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-200 p-6 rounded-lg shadow-lg"
+    >
+      <div class="flex flex-col md:flex-row">
+        <div class="md:w-1/2 place-content-center grid">
+          <Image
+            src={pfp}
+            alt="Cooper Wallace"
+            width={250}
+            height={250}
+            quality={"max"}
+            format="jpg"
+            class="border-4 border-black dark:border-slate-500 drop-shadow-xl shadow-black rounded-full mx-auto mt-8"
+          />
+        </div>
+
+        <div class="md:w-1/2 mt-4 md:mt-0 md:pl-6">
+          <p class="text-gray-800 text-xl mb-2">
+            Hello! I'm {identity.firstName}{" "}{identity.lastName}
+          </p>
+          <p class="text-gray-700 mb-4">
+            I live in the {identity.country} and I work as a {
+              identity.occupation
+            }.
+          </p>
+          <p class="text-gray-700 mb-4">
+            I have a really strong passion in Cybersecurity and also application
+            development, both deriving from my love of programming. I strive to
+            learn new things and I am always looking for new challenges.
+          </p>
+          <p class="text-gray-700">Some of my favorite personal hobbies are:</p>
+          <div class="mb-4">
+            {
+              identity.hobbies.map((hobby) => (
+                <li class="text-gray-700 indent-3">{hobby}</li>
+              ))
+            }
+          </div>
+          <p class="text-gray-700">A high level list of my Skillset:</p>
+          <div class="mb-4">
+            {
+              identity.skills.map((skill, i) => (
+                <p class="text-gray-700 indent-3">
+                  {i + 1}
+                  {". "}
+                  {skill}
+                </p>
+              ))
+            }
+          </div>
+          <p class="text-gray-700">
+            Feel free to get in touch with me at <a
+              href=`mailto:${identity.email}`
+              class="text-blue-600">{identity.email}</a
+            >.
+          </p>
+        </div>
+      </div>
+    </div>
+    <h1 class="underline text-center">Experience</h1>
+    <section class="flex items-center justify-center gap-8">
+      <ExperienceCard
+        title="Security Software Engineer"
+        companyName="Zerofox"
+        imageUrl="https://media.licdn.com/dms/image/C4D0BAQHD2plNt5ghFg/company-logo_100_100/0/1617194440390?e=1702512000&v=beta&t=A--DwSV8YsBzWiF5Z_dortgt8vwbEGhYrmknUsvfTtw"
+        workDurationEnd="Current"
+        workDurationStart="Aug 2022"
+      />
+      <ExperienceCard
+        title="Security Engineer"
+        companyName="Ankura"
+        imageUrl="https://media.licdn.com/dms/image/C4D0BAQEvOGRgiP5zsg/company-logo_100_100/0/1621091813791?e=1702512000&v=beta&t=6gSrJhhTOT85XAX4aXwHzfYEcbxAQSn5xpkD0pROjig"
+        workDurationEnd="Aug 2022"
+        workDurationStart="May 2020"
+      />
+      <ExperienceCard
+        title="Security Analyst"
+        companyName="UnitedLex"
+        imageUrl="https://media.licdn.com/dms/image/D560BAQH1SGwdAGmlMg/company-logo_100_100/0/1688403373116?e=1702512000&v=beta&t=YXSsoadbgYw2srieQRlw-5JZJDKsj2yfdFVtQB4SSKM"
+        workDurationEnd="May 2020"
+        workDurationStart="Apr 2020"
+      />
+    </section>
+    <h1 class="underline text-center">Certifications</h1>
+
+    <section class="flex flex-wrap items-center justify-center gap-8">
+      <CertificateCard
+        imageUrl="https://media.licdn.com/dms/image/D4E0BAQEANDNp1O78-g/company-logo_100_100/0/1692269546180?e=1702512000&v=beta&t=2zPl9V1xfvFG-4TBgrso5tMDuMwTLkW6tV2RQ8cqROo"
+        certTitle="Systems Security Certified Practitioner (SSCP)"
+        certIssuer="ISC2"
+        issueDate="Aug 2022"
+      />
+      <CertificateCard
+        imageUrl="https://media.licdn.com/dms/image/C560BAQHPon7g_XjJpA/company-logo_100_100/0/1519901653038?e=1702512000&v=beta&t=AmvBy_YNnWifV9LFpnU86mZpLsbcapesLH2V3y5S4yk"
+        certTitle="EC-Council Certified Ethical Hacker (CEH)"
+        certIssuer="EC-Council"
+        issueDate="Jun 2021"
+      />
+      <CertificateCard
+        imageUrl="https://media.licdn.com/dms/image/C560BAQHPon7g_XjJpA/company-logo_100_100/0/1519901653038?e=1702512000&v=beta&t=AmvBy_YNnWifV9LFpnU86mZpLsbcapesLH2V3y5S4yk"
+        certTitle="EC-Council Certified Encryption Specialist (ECES)"
+        certIssuer="EC-Council"
+        issueDate="Jan 2022"
+      />
+      <CertificateCard
+        imageUrl="https://media.licdn.com/dms/image/C560BAQERAz2JBkUHzw/company-logo_100_100/0/1519856229209?e=1702512000&v=beta&t=5GmdDfCSF3z6M_rVX7VyTFUtYCp5OmY75Nu3fAWF7Dc"
+        certTitle="Security+"
+        certIssuer="CompTIA"
+        issueDate="Mar 2020"
+      />
+      <CertificateCard
+        imageUrl="https://media.licdn.com/dms/image/C560BAQERAz2JBkUHzw/company-logo_100_100/0/1519856229209?e=1702512000&v=beta&t=5GmdDfCSF3z6M_rVX7VyTFUtYCp5OmY75Nu3fAWF7Dc"
+        certTitle="CySA+"
+        certIssuer="CompTIA"
+        issueDate="May 2020"
+      />
+      <CertificateCard
+        imageUrl="https://media.licdn.com/dms/image/C560BAQERAz2JBkUHzw/company-logo_100_100/0/1519856229209?e=1702512000&v=beta&t=5GmdDfCSF3z6M_rVX7VyTFUtYCp5OmY75Nu3fAWF7Dc"
+        certTitle="Network+"
+        certIssuer="CompTIA"
+        issueDate="Mar 2021"
+      />
+      <CertificateCard
+        imageUrl="https://media.licdn.com/dms/image/C560BAQERAz2JBkUHzw/company-logo_100_100/0/1519856229209?e=1702512000&v=beta&t=5GmdDfCSF3z6M_rVX7VyTFUtYCp5OmY75Nu3fAWF7Dc"
+        certTitle="Project+"
+        certIssuer="CompTIA"
+        issueDate="Jul 2022"
+      />
+      <CertificateCard
+        imageUrl="https://media.licdn.com/dms/image/C560BAQERAz2JBkUHzw/company-logo_100_100/0/1519856229209?e=1702512000&v=beta&t=5GmdDfCSF3z6M_rVX7VyTFUtYCp5OmY75Nu3fAWF7Dc"
+        certTitle="PenTest+"
+        certIssuer="CompTIA"
+        issueDate="Feb 2023"
+      />
+    </section>
+  </div>
+</Layout>

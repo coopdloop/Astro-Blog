@@ -1,0 +1,126 @@
+---
+import { CalendarDays, PenLine } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowRightIcon, ClockIcon } from "@radix-ui/react-icons";
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  description: string;
+  author: string;
+  authorImage: {
+    url: string;
+  };
+  pubDate: string;
+  url: string;
+  tags: string[];
+  image: {
+    url: string;
+  };
+  ttr: string;
+}
+
+const {
+  title,
+  description,
+  author,
+  authorImage,
+  pubDate,
+  url,
+  tags,
+  image,
+  ttr,
+} = Astro.props;
+---
+
+<span
+  class="border border-black p-2 rounded-2xl hover:bg-muted-foreground/5 transition-colors"
+>
+  <a href={url}>
+    <div class="flex items-center border-b-2 border-gray-400 justify-between">
+      <div class="flex items-center gap-2">
+        <Image
+          src={authorImage.url}
+          alt="Cooper Wallace"
+          width={50}
+          height={50}
+          quality={"max"}
+          format="jpg"
+          class="rounded-full m-2"
+          transition:name={`${authorImage.url}_${title}`}
+          transition:animate="slide"
+        />
+        <PenLine client:only="react" />
+        <p
+          class="text-xs"
+          transition:name={`${author}_${title}`}
+          transition:animate="slide"
+        >
+          {author}
+        </p>
+      </div>
+      <div class="flex w-fit items-center">
+        <CalendarDays
+          client:only="react"
+          className="mr-2 h-4 w-4 opacity-70"
+        />{" "}
+        <p transition:name={`${pubDate}_${title}`} transition:animate="slide">
+          {pubDate}
+        </p>
+      </div>
+    </div>
+    <div class="flex justify-between items-center sm:flex-row">
+      <!-- <HoverCardTrigger asChild client:only="react"> -->
+
+      <Button
+        variant="link"
+        className="md:text-2xl text-left max-w-lg sm:text-md h-fit"
+        transition:name={title}
+        transition:animate="slide"
+      >
+        {title}
+      </Button>
+      <!-- </HoverCardTrigger> -->
+    </div>
+    <p
+      class="sm:text-xs md:text-base font-extralight text-black ml-8 dark:text-gray-300 transition-colors text-left mb-4"
+      transition:name={`${description}_${title}`}
+      transition:animate="slide"
+    >
+      {description}
+    </p>
+    <p
+      class="flex items-center gap-2"
+      transition:name={`${ttr}_${title}`}
+      transition:animate="slide"
+    >
+      <ClockIcon />{ttr} read
+    </p>
+
+    <div
+      class="flex flex-wrap items-center"
+      transition:name={`tags_${title}`}
+      transition:animate="slide"
+    >
+      Tags:
+      {
+        tags.map((tag: string) => (
+          <a
+            href={`/tags/${tag}`}
+            class="m-1 border-dotted border border-[#a1a1a1] rounded-lg p-2 hover:p-3 text-lg transition-all w-fit"
+          >
+            {tag}
+          </a>
+        ))
+      }
+    </div>
+    <section class="flex justify-between pb-4 items-end">
+      <img src={image.url} width={300} height={200} class="mt-4" />
+      <a href={url}>
+        <ArrowRightIcon
+          className="bg-slate-600 rounded-full fill-black h-10 min-w-max animate-pulse"
+        /></a
+      >
+    </section>
+  </a>
+</span>

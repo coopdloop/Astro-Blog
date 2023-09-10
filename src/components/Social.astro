@@ -1,0 +1,40 @@
+---
+interface Props {
+  platform: string;
+  username: string;
+}
+
+import {
+  TwitterLogoIcon,
+  LinkedInLogoIcon,
+  GitHubLogoIcon,
+} from "@radix-ui/react-icons";
+const { platform, username } = Astro.props;
+---
+
+{
+  platform === "twitter" && (
+    <a href={`https://www.${platform}.com/${username}`}>
+      <TwitterLogoIcon height={50} width={50} />
+    </a>
+  )
+}
+{
+  platform === "linkedin" && (
+    <a href={`https://www.${platform}.com/${username}`}>
+      <LinkedInLogoIcon height={50} width={50} />
+    </a>
+  )
+}
+{
+  platform === "github" && (
+    <a href={`https://www.${platform}.com/${username}`}>
+      <GitHubLogoIcon height={50} width={50} />
+    </a>
+  )
+}
+
+<!-- <a
+  class="p-1 text-white bg-[#4c1d95] rounded-md"
+  href={`https://www.${platform}.com/${username}`}>{platform}</a
+> -->

@@ -1,0 +1,27 @@
+---
+import Social from "@/components/Social.astro";
+import { Separator } from "@/ui/separator";
+const currentPath = Astro.url.pathname;
+---
+
+<footer
+  class="flex flex-col mt-2 justify-center items-center gap-4 bottom-0 w-full"
+>
+  <Separator />
+  {
+    currentPath !== "/about" && (
+      <a
+        href="/about"
+        class="text-lg hover:bg-muted-foreground/10 p-2 rounded-md"
+      >
+        About me
+      </a>
+    )
+  }
+
+  <section class="flex flex-row justify-center w-full gap-10">
+    <Social platform="twitter" username="cybercooper" />
+    <Social platform="github" username="coopdloop" />
+    <Social platform="linkedin" username="/in/cooper-wallace-0a572a158" />
+  </section>
+</footer>

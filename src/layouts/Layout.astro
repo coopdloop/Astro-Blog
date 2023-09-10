@@ -1,0 +1,60 @@
+---
+interface Props {
+  title?: string;
+}
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import ThemeProvider from "@/components/ThemeProvider.astro";
+import CoffeeWidget from "@/components/BuyCoffeeWidget.tsx";
+import { ViewTransitions, fade } from "astro:transitions";
+const { title } = Astro.props;
+
+import "@/styles/globals.css";
+import AstroLogo from "@/components/AstroLogo.astro";
+import { Badge } from "@/ui/badge";
+import { HeartFilledIcon } from "@radix-ui/react-icons";
+import { ScrollToTop } from "@/components/ScrollToTopButton";
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+
+  <body class="container mx-auto p-1" transition:animate="none">
+    <ScrollToTop client:load />
+    <ThemeProvider />
+    <Header />
+
+    {
+      title !== "My Astro Blog" && (
+        <h1 class="text-center" transition:name={title}>
+          {title}
+        </h1>
+      )
+    }
+
+    {
+      currentPath === "/" && (
+        <span class="flex flex-col fixed right-0 mr-2 top-1/4 z-50">
+          <Badge>
+            <AstroLogo />
+            <p>src</p>
+          </Badge>
+        </span>
+      )
+    }
+    <div transition:animate={fade({ duration: "0.4s" })}>
+      <slot />
+    </div>
+    <Footer />
+    <CoffeeWidget />
+  </body>
+</html>

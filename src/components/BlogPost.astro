@@ -1,0 +1,16 @@
+---
+const { title, url, pubDate, author } = Astro.props;
+import { CalendarDays, PenLine } from "lucide-react";
+---
+
+<li class="grid grid-cols-3 border-b-2 border-white my-4">
+  <a href={url}>{title}</a>
+  <div class="flex gap-2">
+    <PenLine />
+    <a>{author}</a>
+  </div>
+  <div class="flex gap-2">
+    <CalendarDays />
+    <a>{pubDate}</a>
+  </div>
+</li>
