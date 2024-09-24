@@ -17,4 +17,3 @@ repos:
   rev: 'v17.1.2'
   hooks:
   - id: standard
-
