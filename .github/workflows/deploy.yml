@@ -2,7 +2,7 @@ name: Deploy Blog Post
 
 on:
   workflow_run:
-    workflows: ["CI"]
+    workflows: ["CI Pipeline"]
     types:
       - completed
 
