@@ -47,6 +47,17 @@ jobs:
         if: steps.trufflehog.outcome == 'failure'
         run: exit 1
 
+  test:
+    needs: pre-commit
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - run: pnpm i
+
   sast:
     needs: pre-commit
     runs-on: ubuntu-latest
