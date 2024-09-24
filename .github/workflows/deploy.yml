@@ -24,13 +24,22 @@ jobs:
         with:
           version: 8
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install dependencies for script
+        run: pnpm add @actions/github @actions/core
+
       - name: Get latest Node.js version
         id: get-node-version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .github/scripts/get-latest-node-version.js
 
-      - name: Setup Node.js
+      - name: Setup Node.js with latest version
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.get-node-version.outputs.node-version }}

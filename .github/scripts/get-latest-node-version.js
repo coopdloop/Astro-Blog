@@ -1,10 +1,10 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
+import { getOctokit, context } from '@actions/github';
+import * as core from '@actions/core';
 
 async function run() {
   try {
-    const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-    const { owner, repo } = github.context.repo;
+    const octokit = getOctokit(process.env.GITHUB_TOKEN);
+    const { owner, repo } = context.repo;
 
     const workflow = await octokit.rest.actions.listWorkflowRuns({
       owner,
