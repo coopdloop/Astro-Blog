@@ -30,7 +30,7 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            try {
+             try {
               const workflow = await github.rest.actions.listWorkflowRuns({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -38,6 +38,9 @@ jobs:
                 status: 'success',
                 per_page: 1
               })
+              if (workflow.data.workflow_runs.length === 0) {
+                throw new Error('No successful CI workflow runs found')
+              }
               const workflowRun = workflow.data.workflow_runs[0]
               const jobs = await github.rest.actions.listJobsForWorkflowRun({
                 owner: context.repo.owner,
@@ -45,10 +48,17 @@ jobs:
                 run_id: workflowRun.id
               })
               const determineLatestNodeJob = jobs.data.jobs.find(job => job.name === 'determine-latest-node')
-              const latestNodeVersion = determineLatestNodeJob.steps.find(step => step.name === 'Set latest Node.js version').outputs.latest_node
-              return latestNodeVersion
+              if (!determineLatestNodeJob) {
+                throw new Error('Could not find determine-latest-node job')
+              }
+              const setLatestNodeStep = determineLatestNodeJob.steps.find(step => step.name === 'Set latest Node.js version')
+              if (!setLatestNodeStep || !setLatestNodeStep.outputs || !setLatestNodeStep.outputs.latest_node) {
+                throw new Error('Could not find latest_node output in Set latest Node.js version step')
+              }
+              return setLatestNodeStep.outputs.latest_node
             } catch (error) {
-              core.setFailed(`Failed to get latest Node.js version: ${error.message}`)
+              core.warning(`Failed to get latest Node.js version: ${error.message}`)
+              core.warning('Falling back to default Node.js version')
               return '18.17.1' // Fallback to the latest version in your CI matrix
             }
 
