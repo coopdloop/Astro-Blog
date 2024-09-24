@@ -15,17 +15,20 @@ tags: [ "notes", "efficiency", "repository", "information", "zettelkasten", "kno
 ---
 
 ## Table of Contents
+<div class="italic">
 
-1. [Introduction](#introduction)
-2. [Lets talk methods and concepts](#lets-talk-methods-and-concepts)
-   1. [Zettelkasten](#zettelkasten)
-   2. [Knowledge Management System](#knowledge-management-system)
-   3. [Quick formatted notes (Markdown)](#quick-formatted-notes-markdown)
-   4. [Note taking workflows](#note-taking-workflows)
-3. [Obsidian and Notion AI workflow](#obsidian-and-notion-ai-workflow)
-4. [What's Next](#whats-next)
-5. [Inspiration and References](#inspiration-and-references)
+- [Introduction](#introduction)
+  - [Lets talk methods and concepts](#lets-talk-methods-and-concepts)
+    - [Zettelkasten](#zettelkasten)
+    - [Knowledge Management System](#knowledge-management-system)
+    - [Quick formatted notes (Markdown)](#quick-formatted-notes-markdown)
+    - [Note taking workflows](#note-taking-workflows)
+  - [Obsidian and Notion AI workflow](#obsidian-and-notion-ai-workflow)
+  - [What's Next](#whats-next)
+  - [Inspiration and References](#inspiration-and-references)
 ---
+
+</div>
 # Introduction
 
 Welcome to my second blog post! If you are reading this, thank you for taking time out of your day!

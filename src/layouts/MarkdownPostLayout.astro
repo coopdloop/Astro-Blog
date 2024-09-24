@@ -22,53 +22,53 @@ import { Image } from "astro:assets";
   >
     <em>{frontmatter.description}</em>
   </p>
-  <span class="flex flex-row gap-2 my-4 justify-center">
-    <Image
-      src={frontmatter.authorImage.url}
-      alt="Cooper Wallace"
-      width={70}
-      height={70}
-      quality={"max"}
-      format="jpg"
-      class="rounded-full"
-      transition:name={`${frontmatter.authorImage.url}_${frontmatter.title}`}
-    />
-    <div class="flex flex-col">
-      <p
-        transition:name={`${frontmatter.author}_${frontmatter.title}`}
-        transition:animate="slide"
-      >
-        Written by: {frontmatter.author}
-      </p>
-      <div class="flex flex-row gap-4">
-        <div class="flex w-fit items-center">
-          <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
-          <p
-            class="text-sm font-thin"
-            transition:name={`${frontmatter.pubDate}_${frontmatter.title}`}
-            transition:animate="slide"
-          >
-            {frontmatter.pubDate}
-          </p>
-        </div>
+  <div class="flex flex-col justify-center items-center">
+    <span class="flex flex-row gap-2 my-4 justify-center">
+      <Image
+        src={frontmatter.authorImage.url}
+        alt="Cooper Wallace"
+        width={70}
+        height={70}
+        quality={"max"}
+        format="jpg"
+        class="rounded-full"
+        transition:name={`${frontmatter.authorImage.url}_${frontmatter.title}`}
+      />
+      <div class="flex flex-col">
         <p
-          class="text-sm font-thin"
-          transition:name={`${frontmatter.ttr}_${frontmatter.title}`}
+          transition:name={`${frontmatter.author}_${frontmatter.title}`}
           transition:animate="slide"
         >
-          {frontmatter.ttr}{" read"}
+          Written by: {frontmatter.author}
         </p>
+        <div class="flex flex-row gap-4">
+          <div class="flex w-fit items-center">
+            <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
+            <p
+              class="text-sm font-thin"
+              transition:name={`${frontmatter.pubDate}_${frontmatter.title}`}
+              transition:animate="slide"
+            >
+              {frontmatter.pubDate}
+            </p>
+          </div>
+          <p
+            class="text-sm font-thin"
+            transition:name={`${frontmatter.ttr}_${frontmatter.title}`}
+            transition:animate="slide"
+          >
+            {frontmatter.ttr}{" read"}
+          </p>
+        </div>
       </div>
-    </div>
-  </span>
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-
+    </span>
+  <img class="" src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+  </div>
   <div
-    class="my-8 flex flex-wrap items-center w-fit text-center whitespace-nowrap"
+    class="my-8 flex flex-wrap w-full items-center justify-center text-center whitespace-nowrap"
   >
-    <p class="my-4">Blog tags:</p>
     <div
-      class="flex flex-wrap justify-center"
+      class="flex flex-wrap"
       transition:name={`tags_${frontmatter.title}`}
       transition:animate="slide"
     >
@@ -84,5 +84,7 @@ import { Image } from "astro:assets";
       }
     </div>
   </div>
-  <slot />
+  <div class="slot-div p-4 md:p-10">
+    <slot />
+  </div>
 </Layout>

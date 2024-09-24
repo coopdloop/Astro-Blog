@@ -1,13 +1,16 @@
 name: Deploy Blog Post
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
 
 jobs:
-  deploy:
+  build-and-deploy:
+    needs: sast
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         node-version: [ 18.14.2, 18.15.0, 18.17.1 ]
@@ -18,22 +21,54 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::510046314388:role/github.to.aws.oicd
+        aws-region: us-east-1
+
       - name: Install modules
         run: pnpm install
+
       - name: Build application
         run: pnpm build
+
       - name: Deploy to S3
         run: aws s3 sync --delete ./dist/ s3://${{ secrets.BUCKET_ID }}
+
       - name: Create CloudFront invalidation
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
+
+  dast:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: ZAP Scan
+      uses: zaproxy/action-full-scan@v0.10.0
+      with:
+        target: 'https://www.devsec-cooper.codes/'
+
+    - name: Create Issue from ZAP Report
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const fs = require('fs')
+          const zapReport = JSON.parse(fs.readFileSync('zap-full-scan-results.json', 'utf8'))
+          const highAlerts = zapReport.site[0].alerts.filter(alert => alert.riskcode === "3")
+          if (highAlerts.length > 0) {
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'High Risk Vulnerabilities Detected',
+              body: `ZAP scan detected ${highAlerts.length} high risk vulnerabilities. Please review the full scan results.`
+            })
+          }

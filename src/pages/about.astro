@@ -1,17 +1,15 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-
-const pageTitle = "About Me";
 import { Image } from "astro:assets";
 import pfp from "@/assets/images/high_qual_pfp_informal_cropped.jpg";
-import ExperienceCard from "@/components/ExperienceCard.astro";
-import CertificateCard from "@/components/CertificateCard.astro";
+
+const pageTitle = "About Me";
 
 const identity = {
   firstName: "Cooper",
   lastName: "Wallace",
   country: "USA",
-  occupation: "Security Software Engineer",
+  occupation: "Lead Security Engineer",
   hobbies: [
     "Hiking",
     "Gym",
@@ -22,160 +20,197 @@ const identity = {
   ],
   email: "cooper@lariatlabs.dev",
   skills: [
+    "Kubernetes",
     "React",
-    "Nextjs",
-    "Astro",
-    "DevOps",
+    "DevSecOps",
     "Javascript",
     "Python",
     "Golang",
     "Rust",
+    "Bash scripting",
     "Full-Stack Development",
     "CI/CD Pipelines",
     "SAST/DAST tooling",
+    "Code reviews",
+    "SCA",
     "AWS",
-    "Azure",
     "GCP",
-    "...and more!"
   ],
 };
+
+const experience = [
+  {
+    title: "Security Software Engineer",
+    companyName: "Zerofox",
+    imageUrl: "https://embed-ssl.wistia.com/deliveries/1b1347fa71c7b54d5b498a938f9dfeb9.webp?image_crop_resized=960x540",
+    workDurationEnd: "Current",
+    workDurationStart: "Aug 2022"
+  },
+  {
+    title: "Security Engineer",
+    companyName: "Ankura",
+    imageUrl: "https://forms.ankura.com/hs-fs/hubfs/Logos/New%20Logo-01.png?width=950&height=263&name=New%20Logo-01.png",
+    workDurationEnd: "Aug 2022",
+    workDurationStart: "May 2020"
+  }
+];
+
+const certifications = [
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/ics2.png",
+    certTitle: "Systems Security Certified Practitioner (SSCP)",
+    certIssuer: "ISC2",
+    issueDate: "Aug 2022"
+  },
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/elearn.png",
+    certTitle: "eWPTX",
+    certIssuer: "eLearnSecurity",
+    issueDate: "Jul 2024"
+  },
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/ec_c_logo.png",
+    certTitle: "EC-Council Certified Ethical Hacker (CEH)",
+    certIssuer: "EC-Council",
+    issueDate: "Jun 2021"
+  },
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/ec_c_logo.png",
+    certTitle: "EC-Council Certified Encryption Specialist (ECES)",
+    certIssuer: "EC-Council",
+    issueDate: "Jan 2022"
+  },
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png",
+    certTitle: "Security+",
+    certIssuer: "CompTIA",
+    issueDate: "Mar 2020"
+  },
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png",
+    certTitle: "CySA+",
+    certIssuer: "CompTIA",
+    issueDate: "May 2020"
+  },
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png",
+    certTitle: "Network+",
+    certIssuer: "CompTIA",
+    issueDate: "Mar 2021"
+  },
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png",
+    certTitle: "Project+",
+    certIssuer: "CompTIA",
+    issueDate: "Jul 2022"
+  },
+  {
+    imageUrl: "https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png",
+    certTitle: "PenTest+",
+    certIssuer: "CompTIA",
+    issueDate: "Feb 2023"
+  },
+];
 ---
 
 <Layout title={pageTitle}>
-  <div class="md:p-8 sm:p-1">
-    <div
-      class="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-200 p-6 rounded-lg shadow-lg"
-    >
-      <div class="flex flex-col md:flex-row">
-        <div class="md:w-1/2 place-content-center grid">
+  <div class="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+      <div class="md:flex">
+        <div class="md:flex-shrink-0">
           <Image
             src={pfp}
             alt="Cooper Wallace"
             width={250}
             height={250}
-            quality={"max"}
-            format="jpg"
-            class="border-4 border-black dark:border-slate-500 drop-shadow-xl shadow-black rounded-full mx-auto mt-8"
+            class="h-48 w-full object-cover md:h-full md:w-48"
           />
         </div>
-
-        <div class="md:w-1/2 mt-4 md:mt-0 md:pl-6">
-          <p class="text-gray-800 text-xl mb-2">
-            Hello! I'm {identity.firstName}{" "}{identity.lastName}
-          </p>
-          <p class="text-gray-700 mb-4">
-            I live in the {identity.country} and I work as a {
-              identity.occupation
-            }.
-          </p>
-          <p class="text-gray-700 mb-4">
-            I have a really strong passion in Cybersecurity and also application
-            development, both deriving from my love of programming. I strive to
-            learn new things and I am always looking for new challenges.
-          </p>
-          <p class="text-gray-700">Some of my favorite personal hobbies are:</p>
-          <div class="mb-4">
-            {
-              identity.hobbies.map((hobby) => (
-                <li class="text-gray-700 indent-3">{hobby}</li>
-              ))
-            }
+        <div class="p-8">
+          <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+            {identity.occupation}
           </div>
-          <p class="text-gray-700">A high level list of my Skillset:</p>
-          <div class="mb-4">
-            {
-              identity.skills.map((skill, i) => (
-                <p class="text-gray-700 indent-3">
-                  {i + 1}
-                  {". "}
-                  {skill}
-                </p>
-              ))
-            }
-          </div>
-          <p class="text-gray-700">
-            Feel free to get in touch with me at <a
-              href=`mailto:${identity.email}`
-              class="text-blue-600">{identity.email}</a
-            >.
+          <h1 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            {identity.firstName} {identity.lastName}
+          </h1>
+          <p class="mt-2 text-gray-500 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+            </svg>
+            {identity.country}
+          </p>
+          <p class="mt-2 text-gray-500 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
+            <a href={`mailto:${identity.email}`} class="text-indigo-600 hover:text-indigo-800">
+              {identity.email}
+            </a>
           </p>
         </div>
       </div>
-    </div>
-    <h1 class="underline text-center">Experience</h1>
-    <section class="flex items-center justify-center gap-8 flex-col md:flex-row">
-      <ExperienceCard
-        title="Security Software Engineer"
-        companyName="Zerofox"
-        imageUrl="https://embed-ssl.wistia.com/deliveries/1b1347fa71c7b54d5b498a938f9dfeb9.webp?image_crop_resized=960x540"
-        workDurationEnd="Current"
-        workDurationStart="Aug 2022"
-      />
-      <ExperienceCard
-        title="Security Engineer"
-        companyName="Ankura"
-        imageUrl="https://forms.ankura.com/hs-fs/hubfs/Logos/New%20Logo-01.png?width=950&height=263&name=New%20Logo-01.png"
-        workDurationEnd="Aug 2022"
-        workDurationStart="May 2020"
-      />
-    </section>
-    <h1 class="underline text-center">Certifications</h1>
 
-    <section class="flex flex-wrap items-center justify-center gap-8">
-      <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/ics2.png"
-        certTitle="Systems Security Certified Practitioner (SSCP)"
-        certIssuer="ISC2"
-        issueDate="Aug 2022"
-      />
-     <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/elearn.png"
-        certTitle="eWPTX"
-        certIssuer="eLearnSecurity"
-        issueDate="Jul 2024"
-      />
-      <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/ec_c_logo.png"
-        certTitle="EC-Council Certified Ethical Hacker (CEH)"
-        certIssuer="EC-Council"
-        issueDate="Jun 2021"
-      />
-      <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/ec_c_logo.png"
-        certTitle="EC-Council Certified Encryption Specialist (ECES)"
-        certIssuer="EC-Council"
-        issueDate="Jan 2022"
-      />
-      <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png"
-        certTitle="Security+"
-        certIssuer="CompTIA"
-        issueDate="Mar 2020"
-      />
-      <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png"
-        certTitle="CySA+"
-        certIssuer="CompTIA"
-        issueDate="May 2020"
-      />
-      <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png"
-        certTitle="Network+"
-        certIssuer="CompTIA"
-        issueDate="Mar 2021"
-      />
-      <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png"
-        certTitle="Project+"
-        certIssuer="CompTIA"
-        issueDate="Jul 2022"
-      />
-      <CertificateCard
-        imageUrl="https://blog-photo-bucket.s3.amazonaws.com/AboutMe/comptiaLogo.png"
-        certTitle="PenTest+"
-        certIssuer="CompTIA"
-        issueDate="Feb 2023"
-      />
-    </section>
+      <div class="p-8 text-black">
+        <section class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">About Me</h2>
+          <p class="text-gray-700">
+            I have a strong passion for Cybersecurity and application development, both stemming from my love of programming. I constantly strive to learn new things and am always looking for new challenges.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">Skills</h2>
+          <div class="flex flex-wrap gap-2">
+            {identity.skills.map((skill) => (
+              <span class="bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">Hobbies</h2>
+          <ul class="list-disc list-inside">
+            {identity.hobbies.map((hobby) => (
+              <li class="text-gray-700">{hobby}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">Experience</h2>
+          <div class="space-y-4">
+            {experience.map((job) => (
+              <div class="flex items-start">
+                <img src={job.imageUrl} alt={job.companyName} class="w-16 h-16 object-contain mr-4" />
+                <div>
+                  <h3 class="font-bold">{job.title}</h3>
+                  <p class="text-gray-600">{job.companyName}</p>
+                  <p class="text-sm text-gray-500">{job.workDurationStart} - {job.workDurationEnd}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">Certifications</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {certifications.map((cert) => (
+              <div class="flex items-center bg-gray-50 p-4 rounded-lg">
+                <img src={cert.imageUrl} alt={cert.certTitle} class="w-12 h-12 object-contain mr-4" />
+                <div>
+                  <h4 class="font-semibold">{cert.certTitle}</h4>
+                  <p class="text-sm text-gray-600">{cert.certIssuer}</p>
+                  <p class="text-xs text-gray-500">{cert.issueDate}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
 </Layout>
